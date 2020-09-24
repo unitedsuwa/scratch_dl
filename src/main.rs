@@ -1,16 +1,24 @@
 extern crate scratch_dl;
-use scratch_dl::logic_circuit::LogicCircuit;
+// use scratch_dl::logic_circuit::LogicCircuit;
+use scratch_dl::tensor::*;
 
 
 fn main() {
-    let x1: f32 = 1.0;
-    let x2: f32 = 1.0;
-    let logic_and = LogicCircuit::and(x1, x2);
-    let logic_nand = LogicCircuit::nand(x1, x2);
-    let logic_or = LogicCircuit::or(x1, x2);
-    let logic_xor = LogicCircuit::xor(x1, x2);
-    println!("AND: {}", logic_and);
-    println!("NAND: {}", logic_nand);
-    println!("OR {}", logic_or);
-    println!("XOR {}", logic_xor);
+    let vec1 = vec![2.0,2.0];
+    let vec2 = vec![1.0,3.0];
+    let ten1 = TensorAtom::new(vec1);
+    let ten2 = TensorAtom::new(vec2);
+    let ten_result = TensorAtom::dot(&ten1, &ten2);
+    println!("Tensor: {:?}", ten_result);
+    println!("ten1: {:?}", ten1);
+    let ten3 = TensorAtom::new(vec![1.0, 0.0, -1.0, 1.0]);
+    let step_ten = step_func(&ten3);
+    println!("step_ten: {:?}", step_ten);
+    let ten4 = TensorAtom::new(vec![-1.0, 1.0, 2.0]);
+    let sig_ten = sigmoid(&ten4);
+    print!("sig_ten: {:?}", sig_ten);
+    let ten5 = TensorAtom::new(vec![-1.0, 1.0, 2.0, 0.0, -3.0, 3.0]);
+    let relu_ten = relu(&ten5);
+    print!("relu_ten: {:?}", relu_ten);
 }
+
